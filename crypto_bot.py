@@ -62,21 +62,21 @@ def calcular_indicadores(df):
 
 
 def gerar_sinal(df):
-    # Pegar a última linha corretamente
+    # Pega a última linha (apenas 1 linha, não uma Series)
     ultimo = df.iloc[-1]
 
     ema50 = float(ultimo["EMA50"])
     ema200 = float(ultimo["EMA200"])
     rsi = float(ultimo["RSI"])
 
-    # Lógica de sinal
+    # Lógica dos sinais
     if ema50 > ema200 and rsi < 30:
-        return "🔵 COMPRA (tendência forte + RSI baixo)"
+        return "🔵 COMPRA (tendência de alta + RSI baixo)"
 
     if ema50 < ema200 and rsi > 70:
         return "🔴 VENDA (tendência de baixa + RSI alto)"
 
-    return "⚪ Sem sinal claro"
+    return "⚪ Sem sinal"
 
 
 # --------------------------------------------------
