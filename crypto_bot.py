@@ -62,7 +62,13 @@ def calcular_indicadores(df):
 
 
 def gerar_sinal(df):
-    # Pega a última linha (apenas 1 linha, não uma Series)
+    # Garante que não existam NaNs
+    df = df.dropna()
+
+    if df.empty:
+        return "⚠ Dados insuficientes para gerar sinal"
+
+    # Pega a última linha REAL
     ultimo = df.iloc[-1]
 
     ema50 = float(ultimo["EMA50"])
