@@ -62,16 +62,21 @@ def calcular_indicadores(df):
 
 
 def gerar_sinal(df):
-    """Lógica principal da estratégia."""
+    # Pegar a última linha corretamente
     ultimo = df.iloc[-1]
 
-    if ultimo["EMA50"] > ultimo["EMA200"] and ultimo["RSI"] < 30:
-        return "📈 **SINAL DE COMPRA** – Cruzamento altista + RSI baixo"
+    ema50 = float(ultimo["EMA50"])
+    ema200 = float(ultimo["EMA200"])
+    rsi = float(ultimo["RSI"])
 
-    if ultimo["EMA50"] < ultimo["EMA200"] and ultimo["RSI"] > 70:
-        return "📉 **SINAL DE VENDA** – Cruzamento baixista + RSI alto"
+    # Lógica de sinal
+    if ema50 > ema200 and rsi < 30:
+        return "🔵 COMPRA (tendência forte + RSI baixo)"
 
-    return "🔵 **MANTER** – Sem sinal forte"
+    if ema50 < ema200 and rsi > 70:
+        return "🔴 VENDA (tendência de baixa + RSI alto)"
+
+    return "⚪ Sem sinal claro"
 
 
 # --------------------------------------------------
